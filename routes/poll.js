@@ -4,8 +4,8 @@ import { validatePoll } from "../middlewares/pollMidlewares.js";
 
 
 
-const poll = Router()
-poll.post("/poll", validatePoll, pollRegister);
-poll.get("/poll", showPolls)
+const pollRouter = Router()
+pollRouter.post("/poll", validatePoll, pollRegister);
+pollRouter.get("/poll", showPolls)
 
-export default poll;
+export default pollRouter;
