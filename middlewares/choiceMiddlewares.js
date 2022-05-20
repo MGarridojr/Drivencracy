@@ -18,7 +18,6 @@ export async function validateChoice(req, res, next){
 
     }
     if(error){
-        console.log("vim ate aq")
         return res.sendStatus(422)
     }
     next()
