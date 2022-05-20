@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import db from "../db.js";
 
 export async function choiceRegister(req, res){
@@ -9,4 +8,17 @@ export async function choiceRegister(req, res){
         res.sendStatus(500)
     }
     res.sendStatus(201)
+}
+
+export async function showChoices(req, res){
+    const {id} = req.params
+    try{
+        const choices = await db.collection("choices").find({
+            pollId: `${id}`
+        }).toArray()
+        res.send(choices)
+        
+    } catch{
+        res.sendStatus(500)
+    }
 }
