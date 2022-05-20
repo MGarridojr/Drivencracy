@@ -1,7 +1,7 @@
-import joi from "joi";
+
 import Joi from 'joi-oid'
 
-export const choiceShema = joi.object({
-    title: joi.string().required(),
+export const choiceShema = Joi.object({
+    title: Joi.string().required(),
     pollId: Joi.objectId().required() 
 })  
