@@ -15,16 +15,38 @@ export function validatePoll(req, res, next){
 }
 
 export async function validateExpiration(req, res, next){
-    const pollId = req.body.pollId
-    if(pollId){
-        try{
-            const poll = await db.collection("polls").findOne({
+    const { pollId } = req.body
+    const { id } = req.params
+    
+    try{
+        if(pollId){
+            const poll = await db.collection("polls").find({
                 _id: new ObjectId(pollId)
             }).toArray()
-            console.log("poll")
-        } catch{
+            const expireMs = Date.parse(poll[0].expireAt)
+            const todayMs = Date.now()
+            if(todayMs > expireMs){
+               return res.send(403)
+            }
+            
 
         }
+        if(id){
+            const choice = await db.collection("choices").find({
+                _id: new ObjectId(id)
+            }).toArray()
+            const poll = await db.collection("polls").find({
+                _id: new ObjectId(choice[0].pollId)
+            }).toArray()
+            const expireMs = Date.parse(poll[0].expireAt)
+            const todayMs = Date.now()
+            if(todayMs > expireMs){
+               return res.send(403)
+            }
+        }
+
+    } catch{
     }
+
     next()
 }
