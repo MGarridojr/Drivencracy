@@ -9,7 +9,7 @@ export async function pollRegister(req, res){
         res.sendStatus(500)
     }
     
-    res.sendStatus(201)
+    res.sendStatus(201) 
 }
 
 export async function showPolls(req, res){

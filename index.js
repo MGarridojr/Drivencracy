@@ -4,6 +4,7 @@ import cors from 'cors'
 import chalk from 'chalk'
 import pollRouter from "./routes/poll.js"
 import choiceRouter from "./routes/choice.js"
+import voteRouter from "./routes/vote.js"
 
 const app = express()
 app.use(cors())
@@ -14,6 +15,7 @@ dotenv.config()
 //routes
 app.use(pollRouter)
 app.use(choiceRouter)
+app.use(voteRouter)
 
 const port = process.env.PORT
 app.listen(port, () => {
